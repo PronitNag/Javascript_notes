@@ -18,6 +18,7 @@
     setTimeout(() => {
       console.log("Hello")
     }, 1000);
+```
 
 
 Q. Does setTimeout takes a callback function?
