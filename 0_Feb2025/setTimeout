@@ -1,0 +1,23 @@
+# How to use setTimeOut method
+
+```javascript
+
+    setTimeout(hello, 1000);
+       
+    function hello(){
+          console.log("Hello");
+    }
+
+
+    setTimeout(function() {
+    console.log("Hello");
+    }, 1000);
+
+    setTimeout(() => console.log("Hello"), 1000);
+
+    setTimeout(() => {
+      console.log("Hello")
+    }, 1000);
+
+
+Q. Does setTimeout takes a callback function?
