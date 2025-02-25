@@ -24,7 +24,8 @@
 Q. Does setTimeout takes a callback function?
 A  yes
 
-###what is a callback function?
-A A callback function is a function that is passed as an argument to another function and is executed later
+### what is a callback function?
 
-setTimeout(hello, 1000);
+A callback function is a function that is passed as an argument to another function and is executed later
+
+`setTimeout(hello, 1000);`
