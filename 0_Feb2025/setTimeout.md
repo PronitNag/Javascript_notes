@@ -29,3 +29,24 @@ A  yes
 A callback function is a function that is passed as an argument to another function and is executed later
 
 `setTimeout(hello, 1000);`
+
+
+### Give me a simplest example of callback function and expaling callback in a different style?
+
+``` javascript
+function doSomething(callback) {
+ callback();
+}
+
+function sayHi() {
+   console.log("Hi!");
+}
+
+doSomething(sayHi);
+```
+
+It is just a function that takes another function as an argument, which is then called when the rest of the initial function has finished.
+
+The doSomething() function, which is created with the parameter callback, is just calling whatever function is being passed in as an argument.
+
+###
