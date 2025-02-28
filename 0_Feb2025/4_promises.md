@@ -46,6 +46,7 @@ myPromise
 
 .catch() runs when reject() is called.
 
+### How promises run on javascript
 ✔ JavaScript is single-threaded but uses the Event Loop to handle asynchronous tasks.<br />
 ✔ Promises do not block execution; they execute their callbacks only when the task is completed.<br />
 ✔ Other code continues to run normally, ensuring the program remains fast and responsive.<br />
@@ -70,30 +71,30 @@ Start
 End
 Promise Resolved!
 
-"Start" is logged.
-A new Promise is created and resolved immediately, but its .then() callback is placed in the microtask queue.
-"End" is logged.
-Only after all synchronous code finishes, the JavaScript engine picks up the microtask (.then()) and executes it.
-"Promise Resolved!" is finally logged.
+"Start" is logged.<br />
+A new Promise is created and resolved immediately, but its .then() callback is placed in the microtask queue.<br />
+"End" is logged.<br />
+Only after all synchronous code finishes, the JavaScript engine picks up the microtask (.then()) and executes it.<br />
+"Promise Resolved!" is finally logged.<br />
 
 ## ✔ Execution Flow in JavaScript
 When JavaScript encounters an asynchronous task like a Promise or setTimeout(), it follows these steps:
 
 1️⃣ Call Stack:
 
-Executes synchronous code first.
-If it finds an asynchronous task, it sends it to the Web APIs.
+Executes synchronous code first.<br />
+If it finds an asynchronous task, it sends it to the Web APIs.<br />
 2️⃣ Web APIs:
 
-If it’s a Promise, it gets resolved/rejected and moves to the Microtask Queue.
-If it’s a setTimeout(), it waits in the Web API for the specified time.
+If it’s a Promise, it gets resolved/rejected and moves to the Microtask Queue.<br />
+If it’s a setTimeout(), it waits in the Web API for the specified time.<br />
 3️⃣ Queues:
 
-Microtask Queue: Holds resolved/rejected promises (.then() or .catch()).
-Callback Queue: Holds setTimeout(), event listeners, etc.
+Microtask Queue: Holds resolved/rejected promises (.then() or .catch()).<br />
+Callback Queue: Holds setTimeout(), event listeners, etc.<br />
 4️⃣ Event Loop:
 
-First, it checks the Microtask Queue and moves the first task to the Call Stack.
-Then, if the Microtask Queue is empty, it moves a task from the Callback Queue to the Call Stack.
-This ensures Promises are always executed before setTimeout()
+First, it checks the Microtask Queue and moves the first task to the Call Stack.<br />
+Then, if the Microtask Queue is empty, it moves a task from the Callback Queue to the Call Stack.<br />
+This ensures Promises are always executed before setTimeout()<br />
 
