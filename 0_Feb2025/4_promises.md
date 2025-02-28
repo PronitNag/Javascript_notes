@@ -150,3 +150,48 @@ End <br />
 🥉 Third (setTimeout) <br />
 
 > " Think of this as a fetch Api which takes 2 seconds Even if a fetch request takes 2 seconds, it will still execute before a setTimeout(0) because Promises (Microtask Queue) always have higher priority over setTimeout (Callback Queue). "
+
+## 🔹 Example with fetch() (Simulating a 2s Delay)
+
+```javascript
+console.log("Start");
+
+setTimeout(() => console.log("🥉 Third (setTimeout)"), 0);
+
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then(response => response.json())
+  .then(() => console.log("🥈 Second (Fetch Promise)"));
+
+console.log("End");
+```
+
+### 🔍 Expected Output
+Start <br />
+End <br />
+🥈 Second (Fetch Promise) <br />
+🥉 Third (setTimeout) <br />
+
+### 🔥 Key Takeaways
+✔ Even if fetch() takes 2 seconds, its .then() executes before setTimeout(0). <br />
+✔ Microtask Queue (Promises) always has higher priority than Callback Queue (setTimeout).<br />
+✔ Event Loop picks Microtask Queue tasks before Callback Queue tasks.<br />
+
+## Q. But how callback Queue knows that there is some task in microtask queue?
+Ans. The Event Loop is responsible for checking the Call Stack, Microtask Queue, and Callback Queue. Here's how it works: 
+
+🔍 How Does the Callback Queue Know About the Microtask Queue?
+1️⃣ The Event Loop keeps running continuously. <br />
+2️⃣ It first checks the Call Stack—if it's empty, it looks for pending tasks. <br />
+3️⃣ It then checks the Microtask Queue (Promises): <br />
+
+If there are any microtasks, they are executed before moving to the Callback Queue.<br />
+4️⃣ Only when the Microtask Queue is empty does the Event Loop take a task from the Callback Queue.
+
+## 📌 Visual Breakdown
+Imagine the JavaScript Engine working like this:<br />
+
+Event Loop Cycle	Call Stack	Microtask Queue (Promises)	Callback Queue (setTimeout)	Action Taken<br />
+Cycle 1	            🟢 Empty	🔴 Has tasks	            🔴 Has tasks	             Run Microtasks<br />
+Cycle 2	            🟢 Empty	🟢 Empty	                🔴 Has tasks	             Run Callback<br />
+🔹 Microtasks run first, before Callbacks.<br />
+🔹 The Event Loop only takes tasks from the Callback Queue if no Microtasks are left.<br />
