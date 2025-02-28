@@ -65,11 +65,11 @@ myPromise.then(result => {
 console.log("End");
 ```
 
-##### output
+### output
 
-Start
-End
-Promise Resolved!
+Start<br />
+End<br />
+Promise Resolved!<br />
 
 "Start" is logged.<br />
 A new Promise is created and resolved immediately, but its .then() callback is placed in the microtask queue.<br />
