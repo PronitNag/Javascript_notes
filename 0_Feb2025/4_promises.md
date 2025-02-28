@@ -180,6 +180,7 @@ End <br />
 Ans. The Event Loop is responsible for checking the Call Stack, Microtask Queue, and Callback Queue. Here's how it works: 
 
 🔍 How Does the Callback Queue Know About the Microtask Queue?
+
 1️⃣ The Event Loop keeps running continuously. <br />
 2️⃣ It first checks the Call Stack—if it's empty, it looks for pending tasks. <br />
 3️⃣ It then checks the Microtask Queue (Promises): <br />
@@ -191,7 +192,7 @@ If there are any microtasks, they are executed before moving to the Callback Que
 Imagine the JavaScript Engine working like this:<br />
 
 Event Loop Cycle	Call Stack	Microtask Queue (Promises)	Callback Queue (setTimeout)	Action Taken<br />
-Cycle 1	            🟢 Empty	🔴 Has tasks	            🔴 Has tasks	             Run Microtasks<br />
-Cycle 2	            🟢 Empty	🟢 Empty	                🔴 Has tasks	             Run Callback<br />
+Cycle 1	            🟢 Empty &nbsp; &nbsp; &nbsp;	🔴 Has tasks	&nbsp; &nbsp; &nbsp;            🔴 Has tasks	  &nbsp; &nbsp; &nbsp;           Run Microtasks<br />
+Cycle 2	            🟢 Empty &nbsp; &nbsp; &nbsp;	🟢 Empty	  &nbsp; &nbsp; &nbsp;              🔴 Has tasks	&nbsp; &nbsp; &nbsp;            Run Callback<br />
 🔹 Microtasks run first, before Callbacks.<br />
 🔹 The Event Loop only takes tasks from the Callback Queue if no Microtasks are left.<br />
