@@ -142,7 +142,8 @@ console.log("5. End of script");
 5. End of script<br />
 2. Resolved<br />
 
-🔹 Execution Flow
+🔹 Execution Flow<br />
+
 "3. Before calling function" is printed.<br />
 test() is called, "1. Start" is printed.<br />
 Since there is no await, test() immediately returns a Promise.<br />
