@@ -46,5 +46,54 @@ myPromise
 
 .catch() runs when reject() is called.
 
+✔ JavaScript is single-threaded but uses the Event Loop to handle asynchronous tasks.
+✔ Promises do not block execution; they execute their callbacks only when the task is completed.
+✔ Other code continues to run normally, ensuring the program remains fast and responsive.
 
+```javascript
+console.log("Start");
+
+let myPromise = new Promise((resolve, reject) => {
+    resolve("Promise Resolved!"); // Resolving immediately
+});
+
+myPromise.then(result => {
+    console.log(result); // Runs asynchronously
+});
+
+console.log("End");
+```
+
+##### output
+
+Start
+End
+Promise Resolved!
+
+"Start" is logged.
+A new Promise is created and resolved immediately, but its .then() callback is placed in the microtask queue.
+"End" is logged.
+Only after all synchronous code finishes, the JavaScript engine picks up the microtask (.then()) and executes it.
+"Promise Resolved!" is finally logged.
+
+## ✔ Execution Flow in JavaScript
+When JavaScript encounters an asynchronous task like a Promise or setTimeout(), it follows these steps:
+
+1️⃣ Call Stack:
+
+Executes synchronous code first.
+If it finds an asynchronous task, it sends it to the Web APIs.
+2️⃣ Web APIs:
+
+If it’s a Promise, it gets resolved/rejected and moves to the Microtask Queue.
+If it’s a setTimeout(), it waits in the Web API for the specified time.
+3️⃣ Queues:
+
+Microtask Queue: Holds resolved/rejected promises (.then() or .catch()).
+Callback Queue: Holds setTimeout(), event listeners, etc.
+4️⃣ Event Loop:
+
+First, it checks the Microtask Queue and moves the first task to the Call Stack.
+Then, if the Microtask Queue is empty, it moves a task from the Callback Queue to the Call Stack.
+This ensures Promises are always executed before setTimeout()
 
