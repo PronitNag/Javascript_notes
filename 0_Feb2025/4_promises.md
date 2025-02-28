@@ -98,3 +98,30 @@ First, it checks the Microtask Queue and moves the first task to the Call Stack.
 Then, if the Microtask Queue is empty, it moves a task from the Callback Queue to the Call Stack.<br />
 This ensures Promises are always executed before setTimeout()<br />
 
+# What will be the output of this code?
+
+```javascript
+console.log("Start");
+
+setTimeout(() => {
+    console.log("Inside setTimeout");
+}, 0);
+
+Promise.resolve("Inside Promise").then(console.log);
+
+console.log("End");
+```
+
+✔ Step-by-Step Execution <br />
+1️⃣ "Start" is logged (Synchronous - Call Stack). <br />
+2️⃣ setTimeout() moves to Web API, then to Callback Queue.<br />
+3️⃣ Promise.resolve() moves to Web API, then to Microtask Queue.<br />
+4️⃣ "End" is logged (Synchronous - Call Stack). <br />
+5️⃣ The **Microtask Queue runs first**: "Inside Promise" is logged. <br />
+6️⃣ The **Callback Queue runs next**: "Inside setTimeout" is logged. <br />
+
+✔ Final Output <br />
+Start <br />
+End<br />
+Inside Promise<br />
+Inside setTimeout<br />
