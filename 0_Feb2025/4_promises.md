@@ -191,8 +191,12 @@ If there are any microtasks, they are executed before moving to the Callback Que
 ## 📌 Visual Breakdown
 Imagine the JavaScript Engine working like this:<br />
 
-Event Loop Cycle	Call Stack	Microtask Queue (Promises)	Callback Queue (setTimeout)	Action Taken<br />
-Cycle 1	            🟢 Empty &nbsp; &nbsp; &nbsp;	🔴 Has tasks	&nbsp; &nbsp; &nbsp;            🔴 Has tasks	  &nbsp; &nbsp; &nbsp;           Run Microtasks<br />
-Cycle 2	            🟢 Empty &nbsp; &nbsp; &nbsp;	🟢 Empty	  &nbsp; &nbsp; &nbsp;              🔴 Has tasks	&nbsp; &nbsp; &nbsp;            Run Callback<br />
+## JavaScript Event Loop Execution Order
+
+| **Event Loop Cycle** | **Call Stack** | **Microtask Queue** (Promises, `queueMicrotask()`) | **Callback Queue** (`setTimeout()`, `setInterval()`) | **Action Taken** |
+|----------------------|--------------|--------------------------------------|--------------------------------|----------------|
+| **Cycle 1**         | ✅ Empty      | 🔴 Contains tasks                    | 🔴 Contains tasks               | **Run Microtasks** |
+| **Cycle 2**         | ✅ Empty      | ✅ Empty                              | 🔴 Contains tasks               | **Run Callback Queue tasks** |
+
 🔹 Microtasks run first, before Callbacks.<br />
 🔹 The Event Loop only takes tasks from the Callback Queue if no Microtasks are left.<br />
