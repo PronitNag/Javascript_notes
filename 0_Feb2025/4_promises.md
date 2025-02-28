@@ -125,3 +125,28 @@ Start <br />
 End<br />
 Inside Promise<br />
 Inside setTimeout<br />
+
+## Q. Even if the promise takes 2 seconds and the settimeout take 0 seconds then also?
+
+Ans-> Yes! Even if the Promise takes 2 seconds and the setTimeout() takes 0 seconds, the Promise will still execute first once it's resolved because it belongs to the Microtask Queue, which has higher priority than the Callback Queue
+
+```javascript
+console.log("Start");
+
+setTimeout(() => console.log("🥉 Third (setTimeout)"), 0);
+
+new Promise((resolve) => {
+    for (let i = 0; i < 2_000_000_000; i++) {} // Simulating 2s delay (blocking)
+    resolve("🥈 Second (Promise)");
+}).then(console.log);
+
+console.log("End");
+```
+
+## output
+Start <br />
+End <br />
+🥈 Second (Promise) <br />
+🥉 Third (setTimeout) <br />
+
+> " Think of this as a fetch Api which takes 2 seconds Even if a fetch request takes 2 seconds, it will still execute before a setTimeout(0) because Promises (Microtask Queue) always have higher priority over setTimeout (Callback Queue). "
