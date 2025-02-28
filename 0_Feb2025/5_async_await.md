@@ -107,3 +107,89 @@ The function pauses at await fetch(), allowing the event loop to continue. <br /
 Once fetch() finishes, the response is moved to the Task Queue. <br />
 The event loop picks it up and resumes function execution. <br />
 
+### 🔹 How Can Multiple Functions Exist in the Call Stack?
+
+The call stack only executes one function at a time, but when an async function is paused, other functions can enter the stack.<br />
+When an await is hit, the function pauses and is removed from the call stack while waiting for a Promise to resolve.<br />
+Meanwhile, other functions continue executing.<br />
+Once the awaited function resumes, it is pushed back onto the call stack.<br />
+
+
+### Sure! Let's see how an async function without await behaves in the JavaScript event loop.
+
+```javascript
+async function test() {
+    console.log("1. Start");
+    return "2. Resolved"; // No await, so it returns a Promise immediately
+}
+
+console.log("3. Before calling function");
+
+let result = test(); // Calling the async function
+
+console.log("4. Function called");
+
+result.then(console.log); // Handling the returned Promise
+
+console.log("5. End of script");
+```
+
+#### output
+
+3. Before calling function<br />
+1. Start<br />
+4. Function called<br />
+5. End of script<br />
+2. Resolved<br />
+
+🔹 Execution Flow
+"3. Before calling function" is printed.<br />
+test() is called, "1. Start" is printed.<br />
+Since there is no await, test() immediately returns a Promise.<br />
+"4. Function called" is printed.<br />
+"5. End of script" is printed.<br />
+The .then(console.log) is in the microtask queue, so "2. Resolved" prints at the end.<br />
+
+### Great! Now let’s wrap the same code inside another await function and see how it behaves.
+
+```javascript
+async function test() {
+    console.log("1. Start");
+    return "2. Resolved"; // No await, so it returns a Promise immediately
+}
+
+async function main() {
+    console.log("3. Before calling function");
+
+    let result = await test(); // Using await
+
+    console.log("4. Function called");
+    console.log(result); // Logging the resolved value
+
+    console.log("5. End of script");
+}
+
+main();
+console.log("6. Outside function");
+```
+
+output:
+
+3. Before calling function<br />
+1. Start<br />
+6. Outside function<br />
+4. Function called<br />
+2. Resolved<br />
+5. End of script<br />
+
+🔹 Execution Flow
+
+1. "3. Before calling function" is printed.
+2. main() is called, but since it's async, it starts execution and does not block the script.
+3. Inside main(), test() is called, printing "1. Start".
+4. test() returns a Promise, so await test(); pauses execution of main().
+5. While main() is paused, the event loop continues, and "6. Outside function" is printed.
+6. Once test() resolves, await test(); resumes execution.
+7. "4. Function called" is printed.
+8. The resolved value "2. Resolved" is printed.
+9. "5. End of script" is printed last.
