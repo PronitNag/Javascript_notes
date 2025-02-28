@@ -46,9 +46,9 @@ myPromise
 
 .catch() runs when reject() is called.
 
-✔ JavaScript is single-threaded but uses the Event Loop to handle asynchronous tasks.
-✔ Promises do not block execution; they execute their callbacks only when the task is completed.
-✔ Other code continues to run normally, ensuring the program remains fast and responsive.
+✔ JavaScript is single-threaded but uses the Event Loop to handle asynchronous tasks.<br />
+✔ Promises do not block execution; they execute their callbacks only when the task is completed.<br />
+✔ Other code continues to run normally, ensuring the program remains fast and responsive.<br />
 
 ```javascript
 console.log("Start");
