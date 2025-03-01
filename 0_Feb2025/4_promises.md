@@ -22,7 +22,7 @@ The Promise constructor (new Promise()) is used to create a promise.
 
 Inside the executor function, we either call resolve() (if the operation succeeds) or reject() (if it fails).
 
-The promise object returned by new Promise() will be in one of three states:
+**The promise object returned** by new Promise() will be in one of three states:
 
 Pending → Initial state, before resolution or rejection.
 
