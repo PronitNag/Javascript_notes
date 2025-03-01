@@ -49,6 +49,8 @@ doSomething(sayHi);
 
 It is just a function that takes another function as an argument, which is then called when the rest of the initial function has finished.
 
+**The parameter that is passed is stored as a local variable and that is called**
+
 The doSomething() function, which is created with the parameter callback, is just calling whatever function is being passed in as an argument.
 
 ### Give a exapmle of callbacks with real life use??
