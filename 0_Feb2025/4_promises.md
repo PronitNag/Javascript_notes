@@ -41,6 +41,9 @@ myPromise
     console.log("Error:", error);
 });
 ```
+## how to proccess the data when promise is fulfilled?
+
+You can process data in a series of .then() calls, also known as **Promise chaining**. This ensures each step is executed only after the previous one is resolved. You can also use .catch() at the end to handle errors
 
 .then() runs when resolve() is called.
 
