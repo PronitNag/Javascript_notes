@@ -40,6 +40,7 @@ console.log(window.document); // Same as console.log(document)
 console.dir(window) -- The console.dir() method shows a list of all the properties of the specified object.
 
 -we can get the length of the history (in my browser) accessing the history object of the window and then the length of the history object, 
+
 -- window.history.length
 
 other useful methods--
