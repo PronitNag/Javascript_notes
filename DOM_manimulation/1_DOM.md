@@ -8,7 +8,7 @@ The Model in DOM means it's a representation or copy of the HTML document as a h
 
 Basically It grabs an HTML page and turns it into a logical tree.
 
-Browser Object Model (BOM). The BOM holds all the methods and properties for JavaScript to interact with the browser. 
+## Browser Object Model (BOM). The BOM holds all the methods and properties for JavaScript to interact with the browser. 
 - This is information related to previous pages visited, <br />
 - the size of the window of the browser, and <br />
 - also the DOM. <br />
@@ -25,6 +25,10 @@ Attributes influence the element they are specified on. that they modify the ele
 | **Main Object** | `document` | `window` |
 | **Usage** | Modify HTML, CSS, and content dynamically | Interact with browser features (e.g., alerts, history, screen size) |
 | **Examples** | `document.getElementById()`, `document.querySelector()` | `window.alert()`, `window.location.href`, `history.back()` |
+
+## difference in sizes
+- The `window` object is **significantly larger** than `document` because it holds more browser-related data.  
+- The `document` object is only responsible for the webpage content.  
 
 ## 🔗 Relationship Between `window` and `document`
 - `window` is the **global object** in JavaScript.
