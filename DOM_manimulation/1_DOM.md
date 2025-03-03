@@ -37,9 +37,9 @@ console.log(window.document); // Same as console.log(document)
 
 ## we can explore the BOM and see the objects of it with the command 
 
-console.dir(window) -- The console.dir() method shows a list of all the properties of the specified object.
+**console.dir(window)** -- The console.dir() method shows a list of all the properties of the specified object.
 
--we can get the length of the history (in my browser) accessing the history object of the window and then the length of the history object, 
+-we can get the **length of the history (in my browser)** accessing the history object of the window and then the length of the history object, 
 
 -- window.history.length
 
