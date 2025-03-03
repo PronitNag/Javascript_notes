@@ -33,3 +33,19 @@ Attributes influence the element they are specified on. that they modify the ele
 ### Example:
 ```js
 console.log(window.document); // Same as console.log(document)
+```
+
+## we can explore the BOM and see the objects of it with the command 
+
+console.dir(window) -- The console.dir() method shows a list of all the properties of the specified object.
+
+-we can get the length of the history (in my browser) accessing the history object of the window and then the length of the history object, 
+-- window.history.length
+
+other useful methods--
+
+window.history.go(-1);<br />
+console.dir(window.navigator);<br />
+console.dir(navigator);<br />
+location.ancestorOrigins.length;<br />
+
