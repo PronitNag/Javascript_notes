@@ -31,6 +31,26 @@ When working with the Document Object Model (DOM) in JavaScript, you often need 
   console.log(elements.length); // Number of paragraphs
   ```
 
+## Iterating through a `live HTMLCollection`
+- `getElementsByClassName()` and `getElementsByTagName()` return a **live HTMLCollection**.
+- Since HTMLCollection does not have `forEach()`, use a `for` loop or `Array.from()`.
+- Example using `for` loop:
+  ```javascript
+  let elements = document.getElementsByClassName("myClass");
+
+  for (let i = 0; i < elements.length; i++) {
+      console.log(`Element ${i}:`, elements[i]);
+  }
+  ```
+- Example using `Array.from()`:
+  ```javascript
+  let elementsArray = Array.from(document.getElementsByClassName("myClass"));
+
+  elementsArray.forEach((element, index) => {
+      console.log(`Element ${index}:`, element);
+  });
+  ```
+
 ## 4. `document.querySelector()`
 - Selects the **first** matching element using a CSS selector.
 - Returns a **single element** (or `null` if not found).
@@ -48,6 +68,24 @@ When working with the Document Object Model (DOM) in JavaScript, you often need 
   let elements = document.querySelectorAll("div.myClass");
   console.log(elements.length); // Number of matched elements
   ```
+
+  ## Traversing a `NodeList` using `forEach()`
+- The `querySelectorAll()` method returns a `NodeList`, which can be iterated using `forEach()`.
+- Example:
+  ```javascript
+  let elements = document.querySelectorAll(".myClass");
+
+  elements.forEach((element, index) => {
+      console.log(`Element ${index}:`, element);
+  });
+  ```
+
+### Explanation:
+- `document.querySelectorAll()` returns a **NodeList**.
+- `.forEach()` iterates over each element in the NodeList.
+- The callback function takes two arguments:
+  - `element`: The current element in the iteration.
+  - `index`: The index of the element in the NodeList (optional)
 
 ### Summary Table
 | Method                      | Returns                 | Live Update? | Selector Type  |
