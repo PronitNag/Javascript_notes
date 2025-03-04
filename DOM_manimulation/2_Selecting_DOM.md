@@ -97,3 +97,69 @@ When working with the Document Object Model (DOM) in JavaScript, you often need 
 | `querySelectorAll("selector")` | NodeList               | No | CSS Selector |
 
 These methods allow developers to efficiently access and manipulate HTML elements in a webpage.
+
+##  Supporting HTML File
+To test the above JavaScript code, use the following HTML file:
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Selection Example</title>
+</head>
+<body>
+
+    <h1 id="myId">Hello, World!</h1>
+    
+    <p class="myClass">This is a paragraph with class 'myClass'.</p>
+    <p class="myClass">Another paragraph with class 'myClass'.</p>
+
+    <div class="container">
+        <p>This is inside a div.</p>
+        <p>This is another paragraph inside a div.</p>
+    </div>
+
+    <script>
+        // JavaScript code to test DOM selection
+
+        // Selecting by ID
+        let element = document.getElementById("myId");
+        console.log("getElementById:", element);
+
+        // Selecting by Class Name
+        let elementsByClass = document.getElementsByClassName("myClass");
+        console.log("getElementsByClassName:", elementsByClass);
+
+        // Selecting by Tag Name
+        let elementsByTag = document.getElementsByTagName("p");
+        console.log("getElementsByTagName:", elementsByTag);
+
+        // Selecting by querySelector
+        let queryElement = document.querySelector(".myClass");
+        console.log("querySelector:", queryElement);
+
+        // Selecting by querySelectorAll
+        let queryAllElements = document.querySelectorAll(".myClass");
+        console.log("querySelectorAll:", queryAllElements);
+
+        // Iterating through NodeList using forEach
+        queryAllElements.forEach((el, index) => {
+            console.log(`NodeList Element ${index}:`, el);
+        });
+
+        // Iterating through live HTMLCollection using for loop
+        for (let i = 0; i < elementsByClass.length; i++) {
+            console.log(`HTMLCollection Element ${i}:`, elementsByClass[i]);
+        }
+
+        // Iterating through live HTMLCollection using Array.from()
+        let elementsArray = Array.from(elementsByClass);
+        elementsArray.forEach((el, index) => {
+            console.log(`HTMLCollection (converted to array) Element ${index}:`, el);
+        });
+    </script>
+
+</body>
+</html>
+```
