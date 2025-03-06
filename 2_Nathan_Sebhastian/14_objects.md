@@ -45,7 +45,7 @@ let myBook = {
   },
 };
 ```
-Here, the `describe` key is a function that prints the title and author. The `this` keyword refers to the `myBook` object.
+Here, the `describe` key is a function that prints the title and author. The `this` keyword refers to the `myBook` object. 
 
 ### Accessing Object Properties
 
