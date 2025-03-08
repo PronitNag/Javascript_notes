@@ -163,3 +163,49 @@ To test the above JavaScript code, use the following HTML file:
 </body>
 </html>
 ```
+
+## what does queryselector take as a parameter?
+
+# querySelector() Parameters in JavaScript
+
+## What does `querySelector()` take as a parameter?
+
+In JavaScript, the `.querySelector()` method takes a **CSS selector** as a parameter and returns the **first** element that matches the selector. If no element matches, it returns `null`.
+
+### **Syntax:**
+```javascript
+document.querySelector(selector);
+```
+
+### **Examples:**
+
+#### 1. **Selecting an element by ID** (Use `#` before the ID)
+```javascript
+let element = document.querySelector("#myId");
+```
+
+#### 2. **Selecting an element by class** (Use `.` before the class name)
+```javascript
+let element = document.querySelector(".myClass");
+```
+
+#### 3. **Selecting an element by tag name**
+```javascript
+let element = document.querySelector("p");  // Selects first <p> element
+```
+
+#### 4. **Selecting nested elements**
+```javascript
+let element = document.querySelector("div .child");  // Selects first element with class "child" inside a <div>
+```
+
+#### 5. **Selecting elements with attributes**
+```javascript
+let element = document.querySelector("input[type='text']");  // Selects first input of type text
+```
+
+### **Key Points:**
+- It accepts any valid **CSS selector**.
+- It **only returns the first** matching element.
+- If multiple elements match, use `.querySelectorAll()` to get all matches.
+
