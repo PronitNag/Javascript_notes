@@ -31,9 +31,9 @@ Hello, World!
 I'm learning JavaScript
 ```
 
-The property returns a string with the text contained within the element, including text from its descendants.
+The property returns a string with the text contained within the element, **including text from its descendants**.
 
-You should know that `innerText` only returns the text that is visible at the particular moment when the string is requested. If a child element is hidden, its text won't be visible.
+You should know that `innerText` only returns the text that is visible at the particular moment when the string is requested. If a **child element is hidden**, its text won't be visible.
 
 This is an example where the second paragraph is hidden:
 
@@ -56,19 +56,19 @@ This will be the output:
 Hello, World!
 ```
 
-You can set the `innerText` of an HTML element like this, but this will replace the existing text and add a line break (`br`) element for every line break:
+You can set the `innerText` of an HTML element like this, but this will replace the existing text and **add a line break (`br`) element** for every line break:
 
 ```javascript
 container.innerText = "JavaScript is awesome!";
 ```
 
-Since `innerText` takes visibility into account, getting its value triggers a process called "reflow", that recalculates the position of certain elements on the website. This process can be computationally intensive, so you should avoid triggering it if possible.
+Since `innerText` takes visibility into account, getting its value triggers a process called **"reflow"**, that recalculates the position of certain elements on the website. This process can be computationally intensive, so you should avoid triggering it if possible.
 
 ---
 
 ## Great. Now let's talk about `textContent`
 
-`textContent` returns the plain text content of an element, including all the text within its descendants.
+`textContent` returns the **plain text content** of an element, including all the text within its descendants.
 
 The most important difference between `innerText` and `textContent` is that `textContent` always returns the full text content of an HTML element and its descendants, regardless of whether it's visible or hidden.
 
@@ -109,7 +109,7 @@ Hello, World!
 I'm learning JavaScript
 ```
 
-`textContent` will also include the content of elements like `<script>` and `<style>`.
+`textContent` will also include the content of elements like **`<script>` and `<style>`**.
 
 If you try to replace the value of `textContent` on a node, it will remove all its child nodes and replace them with a single text node containing the new string:
 
@@ -124,9 +124,9 @@ container.textContent = "Hello, World!";
 
 Remember that with `innerHTML` you can set the inner HTML content of an element. This is helpful for injecting new HTML into the DOM dynamically.
 
-However, remember that this poses a security risk if you don't have control over the string, such as strings containing data entered by the user. If that data is malicious, it can lead to serious security issues.
+However, remember that this poses a **security risk** if you don't have control over the string, such as strings containing **data entered by the user**. If that data is malicious, it can lead to serious security issues.
 
-To avoid this, it's recommended to use the `textContent` property to insert plain text instead.
+To avoid this, it's recommended to use the **`textContent`** property to insert plain text instead.
 
 The `innerText`, `textContent`, and `innerHTML` properties in JavaScript provide different ways to access and manipulate the content of HTML elements. You should understand the differences between these properties if your goal is to work with HTML content in JavaScript effectively.
 
