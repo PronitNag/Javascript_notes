@@ -6,7 +6,7 @@ These are properties that you can access in JavaScript to get or change the cont
 
 ## Let's start with `innerText`
 
-`innerText` represents the visible text content of the HTML element and its descendants. This property doesn't include hidden text or HTML tags, only rendered text.
+`innerText` represents the visible text content of the HTML element and its descendants. This property doesn't include **hidden text** or HTML tags, only rendered text.
 
 For example, here you can see a `div` element that contains two paragraphs:
 
