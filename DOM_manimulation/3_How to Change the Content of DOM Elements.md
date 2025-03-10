@@ -1,114 +1,134 @@
-# How to Change the Content of DOM Elements
+# What is the difference between `innerText`, `textContent`, and `innerHTML`?
 
-So far you've learned about different ways to select DOM elements. But that is only the beginning. Now, let's see how you can manipulate the DOM to change the content of a webpage.
+Let's learn about `innerText`, `textContent`, and `innerHTML`.
 
-The first thing you need to do is to select the element. You can do that using any of the methods you learned from the previous section.
+These are properties that you can access in JavaScript to get or change the content of an HTML element. Even if they may look very similar at first, they do have key differences. Choosing the right one depends on your specific use case, so let's dive in.
 
-After selecting the element, there are several methods you can use to add or update the content.
+## Let's start with `innerText`
 
-## The `innerHTML` Property
+`innerText` represents the visible text content of the HTML element and its descendants. This property doesn't include hidden text or HTML tags, only rendered text.
 
-This is a method that allows you to read or update both the structure and content of elements. Let's see an example of how you can use the `innerHTML` method.
-
-The following is some markup of three paragraphs, each with an `id`:
+For example, here you can see a `div` element that contains two paragraphs:
 
 ```html
-<p id="topic">JS array methods</p>
-<p id="first-method">map</p>
-<p id="second-method">filter</p>
+<div id="container">
+  <p>Hello, World!</p>
+  <p>I'm learning JavaScript</p>
+</div>
 ```
 
-You can read or get the content of any of the paragraphs using `innerHTML`. For example, let's get the content of the first paragraph:
+If we get a reference to this HTML element in our JavaScript code using `getElementById()`, we can access the `innerText` property of this element:
 
 ```javascript
-const topicElement = document.querySelector('#topic');
-console.log(topicElement.innerHTML);
+const container = document.getElementById("container");
+console.log(container.innerText);
 ```
 
-Now, let's say you want to update the topic from "JS array methods" to "JavaScript array methods". You can do that by assigning the new text to the `innerHTML` of the element:
+This is the inner text of this element:
 
-```javascript
-const topicElement = document.querySelector('#topic');
-topicElement.innerHTML = "JavaScript array methods";
+```
+Hello, World!
+I'm learning JavaScript
 ```
 
-With `innerHTML`, you can change more than just the content. You can also change the HTML structure of the element. For example, if you want to make the word "JavaScript" bold, you could do this:
+The property returns a string with the text contained within the element, including text from its descendants.
 
-```javascript
-topicElement.innerHTML = "<b>JavaScript</b> array methods";
-```
+You should know that `innerText` only returns the text that is visible at the particular moment when the string is requested. If a child element is hidden, its text won't be visible.
 
-## Security Risks With `innerHTML`
-
-Using `innerHTML` poses potential security risks. An example is cross-site scripting (XSS) attacks.
-
-If the content you're inserting comes from user input or any untrusted source, be sure to validate and sanitize it before using `innerHTML` to prevent XSS attacks. You can use a library like [DOMPurify](https://github.com/cure53/DOMPurify) to do this.
-
-Also, if you are working with plain text content, consider using methods like `innerText` and `textContent`.
-
-## The `innerText` and `textContent` Properties
-
-Both `innerText` and `textContent` ignore HTML tags and treat them as part of a string. You can use both methods to read or update the text of DOM elements.
-
-A key difference between the two is in how they treat the text. Using `innerText` returns the text as it appears on the screen. Using `textContent` returns text as it appears in the markup. Let's see an example below.
+This is an example where the second paragraph is hidden:
 
 ```html
-<p>Key =<span style="display: none;"> ABC123</span></p>
+<div id="container">
+  <p>Hello, World!</p>
+  <p hidden>I'm learning JavaScript</p>
+</div>
 ```
 
-The example includes a paragraph element. Inside the paragraph is a span that contains a key. The key does not appear on screen because its inline style is set to `display: none`.
-
-Now, let's select the paragraph and print both the `innerText` value and `textContent` value to see the difference:
+If we try to log the `innerText` again, now the output won’t have the text of the second paragraph:
 
 ```javascript
-const paragraph = document.querySelector('p');
-
-console.log("innerText: ", paragraph.innerText);
-console.log("textContent: ", paragraph.textContent);
+console.log(container.innerText);
 ```
 
-Note how `innerText` returns the text as it appears on the screen (without the value of the key which is hidden with CSS). And note how `textContent` returns the text including hidden elements and whitespaces.
+This will be the output:
 
-Let's see another example for adding text to an element. The following code includes two paragraphs, each with bold text and an empty span, as well as a horizontal line between them:
+```
+Hello, World!
+```
+
+You can set the `innerText` of an HTML element like this, but this will replace the existing text and add a line break (`br`) element for every line break:
+
+```javascript
+container.innerText = "JavaScript is awesome!";
+```
+
+Since `innerText` takes visibility into account, getting its value triggers a process called "reflow", that recalculates the position of certain elements on the website. This process can be computationally intensive, so you should avoid triggering it if possible.
+
+---
+
+## Great. Now let's talk about `textContent`
+
+`textContent` returns the plain text content of an element, including all the text within its descendants.
+
+The most important difference between `innerText` and `textContent` is that `textContent` always returns the full text content of an HTML element and its descendants, regardless of whether it's visible or hidden.
+
+Here we have the same example in HTML:
 
 ```html
-<p>
-  <b>innerText Example</b>
-  <span id="inner-text"></span>
-</p>
-
-<hr>    
-
-<p>
-  <b>textContent Example</b>
-  <span id="text-content"></span>
-</p>
+<div id="container">
+  <p>Hello, World!</p>
+  <p>I'm learning JavaScript</p>
+</div>
 ```
 
-Now, let's select the two span elements and add the same text to them. This will help you better understand the difference between `innerText` and `textContent`.
+If you try to access this property, you'll see the text of the element and its descendants as the output, keeping the indentation and spacing:
 
 ```javascript
-const example1 = document.querySelector('#inner-text');
-const example2 = document.querySelector('#text-content');
-
-let address = `
-  ABC Street,
-  Spintex Road,
-  Accra,
-  Ghana.
-`;
-
-example1.innerText = address;
-example2.textContent = address;
+const container = document.getElementById("container");
+console.log(container.textContent);
 ```
 
-The code gives the same variable `address` to the two examples. The first uses `innerText` and the second uses `textContent`. See the results below:
+```
+Hello, World!
+I'm learning JavaScript
+```
 
-Notice how `innerText` uses the line breaks but the `textContent` example doesn't.
+If an HTML element is not visible, like you can see over here, where we’ve hidden the second paragraph, its text will still be included in this property:
 
-Another key difference between the two methods is how they behave when used inside loops. `innerText` can be slower than `textContent` when dealing with bulk operations or frequent updates in a loop.
+```html
+<div id="container">
+  <p>Hello, World!</p>
+  <p hidden>I'm learning JavaScript</p>
+</div>
+```
 
-Read this [freeCodeCamp article](https://www.freecodecamp.org/news/javascript-innerhtml-vs-innertext-vs-textcontent/) to learn more about the difference between `innerHTML`, `innerText`, and `textContent`.
+You will see the same output:
+
+```
+Hello, World!
+I'm learning JavaScript
+```
+
+`textContent` will also include the content of elements like `<script>` and `<style>`.
+
+If you try to replace the value of `textContent` on a node, it will remove all its child nodes and replace them with a single text node containing the new string:
+
+```javascript
+const container = document.getElementById("container");
+container.textContent = "Hello, World!";
+```
+
+---
+
+## And finally, let's talk about how `textContent` and `innerText` differ from `innerHTML`
+
+Remember that with `innerHTML` you can set the inner HTML content of an element. This is helpful for injecting new HTML into the DOM dynamically.
+
+However, remember that this poses a security risk if you don't have control over the string, such as strings containing data entered by the user. If that data is malicious, it can lead to serious security issues.
+
+To avoid this, it's recommended to use the `textContent` property to insert plain text instead.
+
+The `innerText`, `textContent`, and `innerHTML` properties in JavaScript provide different ways to access and manipulate the content of HTML elements. You should understand the differences between these properties if your goal is to work with HTML content in JavaScript effectively.
 
 
 
